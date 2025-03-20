@@ -10,7 +10,8 @@ import androidx.activity.enableEdgeToEdge
 
 class MainActivity : ComponentActivity() {
     private lateinit var videoView: VideoView
-    private val CURRENT_POSITION: String = "currentPosition"
+    private val packageName: String = "com.rsts.svetlhelp"
+    private val CURRENT_POSITION: String = "$packageName.currentPosition"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,12 +44,5 @@ class MainActivity : ComponentActivity() {
         val myPrefs = this.getSharedPreferences(CURRENT_POSITION, MODE_PRIVATE)
         videoView.seekTo(myPrefs.getInt(CURRENT_POSITION, videoView.currentPosition))
         videoView.start()
-    }
-
-    override fun onStop() {
-        super.onStop()
-        val myPrefs = getSharedPreferences(CURRENT_POSITION, MODE_PRIVATE).edit()
-        myPrefs.putInt(CURRENT_POSITION, 0)
-        myPrefs.apply()
     }
 }
